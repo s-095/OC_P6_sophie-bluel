@@ -102,6 +102,13 @@ li:hover {
 	display: flex;
 	align-items: center;
 }
+.filters button {
+height: 37px;
+background-color: white;
+border-radius: 60px;
+border: 1px solid #1D6154;
+}
+
 #introduction figure {
 	flex: 1
 }
