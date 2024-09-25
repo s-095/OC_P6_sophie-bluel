@@ -28,3 +28,6 @@ async function getWorks() {
     }
 }
 
+async function getLog() {
+    
+}
