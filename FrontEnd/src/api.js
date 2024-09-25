@@ -28,6 +28,32 @@ async function getWorks() {
     }
 }
 
-async function getLog() {
-    
+async function logUser(user) {
+    try {
+        let response = await fetch(url + "users/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (response.status !== 200) {
+            return {
+                ok: false
+            };
+        } else {
+            let result = await response.json();
+            return {
+                ok: true,
+                token: result.token
+            }
+        }
+
+    } catch (error) {
+        console.error('Erreur:', error);
+        return {
+            ok: false
+        }
+    }
 }
