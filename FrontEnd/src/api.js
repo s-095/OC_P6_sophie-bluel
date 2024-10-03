@@ -57,3 +57,36 @@ async function logUser(user) {
         }
     }
 }
+
+async function deleteWork(id) {
+    const token = window.localStorage.getItem("authToken");
+
+    if (!token) {
+        console.error("Erreur: token non trouvé !");
+        return false;
+    }
+
+    try {
+        const response = await fetch(url + `works/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur lors de la suppression: ${response.status}`);
+        }
+
+        console.log("Suppression réussie");
+        return true;
+    } catch (error) {
+        console.error("Erreur lors de la suppression:", error.message);
+        return false;
+    }
+}
+
+async function addWork() {
+
+}

@@ -21,15 +21,57 @@ async function generateWorks(categoryId = null) {
             gallery.appendChild(figure);
             figure.appendChild(img);
             figure.appendChild(caption);
-
+            
         }
     };
 }
 
-if (isConnected()) {
+function isConnected() {
+    return localStorage.getItem("authToken") !== null;
+}
 
+function displayEditMode() {
+    const editModeBanner = document.querySelector(".edit_mode");
+    if (editModeBanner) {
+        editModeBanner.style.visibility = "visible";
+    }
+}
+
+function updatePortfolio() {
+    const filters = document.querySelector(".filters");
+    const modal = document.querySelector(".js-modal");
+
+    if (filters) {
+        filters.style.display = "none";
+    }
+
+    if (modal) {
+        modal.style.display = "flex";
+    }
+}
+
+function updateLoginButton() {
+    const loginButton = document.querySelector("nav ul li a[href='login-page.html']");
+
+    if (loginButton) {
+        if (isConnected()) {
+            loginButton.textContent = "Logout";
+            loginButton.href = "#";
+            loginButton.addEventListener("click", function () {
+                localStorage.removeItem("authToken");
+                window.location.href = "index.html";
+            });
+        } else {
+            loginButton.textContent = "Login";
+            loginButton.href = "login-page.html";
+        }
+    }
+}
+
+if (isConnected()) {
     updateLoginButton();
     displayEditMode();
+    updatePortfolio();
 }
 
 generateWorks()

@@ -3,6 +3,10 @@
    License: none (public domain)
 */
 
+* {
+	box-sizing: border-box;
+}
+
 html,
 body,
 div,
@@ -151,6 +155,9 @@ body {
 	justify-content: center;
 	align-items: center;
 	position: absolute;
+	right: 0;
+	top: 0;
+	visibility: hidden;
 }
 
 header {
@@ -201,6 +208,7 @@ nav a {
 	color: black;
 	text-decoration: none;
 }
+
 nav img {
 	height: 20px;
 }
@@ -331,8 +339,6 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
-
-
 #login>* {
 	text-align: center;
 }
@@ -373,8 +379,148 @@ input[type="submit"] {
 	padding: 10px;
 }
 
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: fadeIn .3s both;
+}
+
+.js-modal {
+	display: none;
+	text-decoration: none;
+	color: black;
+}
+
+.modal-wrapper {
+	background-color: white;
+	border-radius: 10px;
+	width: 630px;
+	height: 688px;
+	padding: 20px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vw - 20px);
+	overflow: auto;
+}
+
+.gallery-modal {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 76px 76px 76px 76px 76px;
+	grid-column-gap: 5px;
+	grid-row-gap: 15px;
+	margin: 0px 50px;
+}
+
+
+.modal-figure {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.modal-img {
+    width: 76px;
+    height: auto;
+    display: block;
+}
+.delete-icon {
+    position: absolute;
+    top: 5px;
+    right: -12px;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    background-color: black;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-button-container {
+	display: flex;
+	justify-content: end;
+}
+
+.js-modal-close {
+	background-color: white;
+	border: none;
+	font-size: 20px;
+}
+
+h3 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px;
+}
+
+hr {
+	margin: 20px;
+}
+
+.add-photo-button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 10px;
+	height: 30px;
+	padding: 0px 30px;
+	text-align: center;
+	position: relative;
+	right: -185px;
+	border-radius: 60px;
+}
+
+.hidden {
+    display: none;
+}
+
+.back-button-container {
+    text-align: left; 
+    margin-top: 10px;
+}
+
+.back-to-gallery {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-to-gallery i {
+    margin-right: 5px
+}
+
+#add-photo-form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#add-photo-form 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
