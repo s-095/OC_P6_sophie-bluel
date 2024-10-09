@@ -12,8 +12,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="./src/api.js"></script>
 	<script src="./src/btn.js" defer></script>
 	<script src="./src/main.js" defer></script>
@@ -54,13 +54,15 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<a href="modal1" class="js-modal"><i class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			<div class="title-container">
+				<h2>Mes Projets</h2>
+				<a href="modal1" class="js-modal"><i class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			</div>
 			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title"
 				style="display:none">
 				<div class="modal-wrapper js-modal-stop">
-					<div class ="close-button-container">
-					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+					<div class="close-button-container">
+						<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
 					</div>
 					<div id="gallery-page">
 						<h3 id="modal-title">Galerie photo</h3>
@@ -68,26 +70,29 @@
 						<hr>
 						<button class="add-photo-button">Ajouter une photo</button>
 					</div>
-			
+
 					<div id="add-photo-page" class="hidden">
 
 						<div class="back-button-container">
 							<button class="back-to-gallery"><i class="fa-solid fa-arrow-left"></i></button>
 						</div>
-			
-						<h3>Ajouter une photo</h3>
-						<form id="add-photo-form">
-							<label for="image">Choisir une image</label>
-							<input type="file" id="image" name="image" accept="image/*" required>
-			
+
+						<h3>Ajout photo</h3>
+						<form id="add-photo-form" action="#" method="post">
+							<div class="add-photo-section">
+								<i class="fa-regular fa-image"></i>
+								<label for="image">+ Ajouter photo</label>
+								<input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
+								<p>jpg, png : 4mo max</p>
+							</div>
 							<label for="title">Titre</label>
 							<input type="text" id="title" name="title" required>
-			
+
 							<label for="category">Catégorie</label>
 							<select id="category" name="category" required>
-								
+
 							</select>
-			
+							<hr>
 							<button type="submit" class="submit-btn">Valider</button>
 						</form>
 					</div>
@@ -117,7 +122,7 @@
 	<footer>
 		<nav>
 			<ul>
-				<li>Mentions Légales</li>
+				<li><a href="#">Mentions Légales</a></li>
 			</ul>
 		</nav>
 	</footer>

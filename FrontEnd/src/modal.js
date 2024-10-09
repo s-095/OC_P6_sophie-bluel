@@ -35,11 +35,12 @@ async function loadModalGallery() {
         deleteIcon.addEventListener("click", async () => {
             const confirmDelete = confirm(`Voulez-vous vraiment supprimer '${work.title}' ?`);
             if (confirmDelete) {
-                const token = localStorage.getItem("token");
+                const token = localStorage.getItem("authToken");
                 const success = await deleteWork(work.id, token);
 
                 if (success) {
                     modalGallery.removeChild(figure);
+                    generateWorks();
                 }
             }
         });
@@ -82,7 +83,6 @@ window.addEventListener("keydown", function (e) {
     }
 })
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.querySelector(".add-photo-button");
     const backToGalleryBtn = document.querySelector(".back-to-gallery");
@@ -115,3 +115,29 @@ async function loadCategories() {
         categorySelect.appendChild(option);
     });
 }
+
+const addPhotoForm = document.getElementById("add-photo-form");
+addPhotoForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    
+    const formData = new FormData(addPhotoForm);
+    const token = localStorage.getItem("authToken");
+
+    try {
+        const newWork = await addWork(formData, token);
+        if (newWork) {
+            generateWorks();
+            addPhotoForm.reset();
+        } else {
+            alert("Erreur lors de l'ajout de la photo.");
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout:", error);
+    }
+});
+
+document.querySelector(".add-photo-selection file").addEventListener ("change", (event) => {});
+
+
+
+

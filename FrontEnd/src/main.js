@@ -55,14 +55,14 @@ function updateLoginButton() {
 
     if (loginButton) {
         if (isConnected()) {
-            loginButton.textContent = "Logout";
+            loginButton.textContent = "logout";
             loginButton.href = "#";
             loginButton.addEventListener("click", function () {
                 localStorage.removeItem("authToken");
                 window.location.href = "index.html";
             });
         } else {
-            loginButton.textContent = "Login";
+            loginButton.textContent = "login";
             loginButton.href = "login-page.html";
         }
     }

@@ -115,6 +115,7 @@ body {
 	line-height: 1;
 }
 
+
 ol,
 ul {
 	list-style: none;
@@ -144,6 +145,7 @@ body {
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 
 .edit_mode {
@@ -160,10 +162,15 @@ body {
 	visibility: hidden;
 }
 
+main {
+	padding: 38px 90px;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin-top: 50px;
+	padding: 38px 38px 0px 50px;
 }
 
 section {
@@ -256,7 +263,6 @@ li:hover {
 
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
 }
 
@@ -337,6 +343,8 @@ input[type="submit"] {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
+	height: 42px;
+	border: none;
 }
 
 #login>* {
@@ -392,10 +400,24 @@ input[type="submit"] {
 	animation: fadeIn .3s both;
 }
 
+.title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 90px;
+}
+
+.title-container h2 {
+	margin: 0;
+	padding-right: 10px;
+}
+
 .js-modal {
 	display: none;
 	text-decoration: none;
 	color: black;
+	justify-content: center;
+	margin: 0px 5px 25px 0px;
 }
 
 .modal-wrapper {
@@ -415,31 +437,32 @@ input[type="submit"] {
 	grid-template-columns: 76px 76px 76px 76px 76px;
 	grid-column-gap: 5px;
 	grid-row-gap: 15px;
-	margin: 0px 50px;
+	margin: 0px 85px;
 }
 
 
 .modal-figure {
-    position: relative;
-    display: inline-block;
-    margin: 10px;
+	position: relative;
+	display: inline-block;
+	margin: 10px;
 }
 
 .modal-img {
-    width: 76px;
-    height: auto;
-    display: block;
+	width: 76px;
+	height: auto;
+	display: block;
 }
+
 .delete-icon {
-    position: absolute;
-    top: 5px;
-    right: -12px;
-    color: white;
-    font-size: 10px;
-    cursor: pointer;
-    background-color: black;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	top: 5px;
+	right: -12px;
+	color: white;
+	font-size: 10px;
+	cursor: pointer;
+	background-color: black;
+	padding: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .close-button-container {
@@ -475,30 +498,34 @@ hr {
 	position: relative;
 	right: -185px;
 	border-radius: 60px;
+	height: 43px;
+	border: none;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .back-button-container {
-    text-align: left; 
-    margin-top: 10px;
+	text-align: left;
+	margin-top: 10px;
+	position: fixed;
+    top: 184px;
 }
 
 .back-to-gallery {
-    background-color: transparent;
-    border: none;
-    color: #333;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 5px 10px;
-    display: inline-flex;
-    align-items: center;
+	background-color: transparent;
+	border: none;
+	color: #333;
+	font-size: 16px;
+	cursor: pointer;
+	padding: 5px 10px;
+	display: inline-flex;
+	align-items: center;
 }
 
 .back-to-gallery i {
-    margin-right: 5px
+	margin-right: 5px
 }
 
 #add-photo-form {
@@ -508,11 +535,127 @@ hr {
 	flex-direction: column;
 }
 
-#add-photo-form 
+
+#add-photo-form {
+	width: 70%;
+	margin: auto;
+}
+
+#add-photo-form h2 {
+	margin-bottom: 20px;
+}
+
+#add-photo-form form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#add-photo-form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#add-photo-form label {
+	margin: 2em 0 1em 0;
+}
+
+#add-photo-form select {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#add-photo-form button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	height: 42px;
+	border: none;
+}
+
+#add-photo-form hr {
+	margin: 40px 0px;
+}
+
+#add-photo-form #image {
+	box-shadow: none;
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
+}
+
+#add-photo-form p {
+	color: #B9C5CC;
+}
+
+#add-photo-form input[type=file]::file-selector-button {
+	margin-right: 8px;
+	border: none;
+	background: #B9C5CC;
+	padding: 8px 12px;
+	color: #306685;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+#add-photo-form input[type=file]::file-selector-button:hover {
+	background: #a6b1b8;
+}
+
+#add-photo-form #file-upload-button {
+	border-radius: 24px;
+}
+
+#add-photo-form .fa-regular {
+	font-size: 76px;
+	color: #B9C5CC;
+}
+
+.add-photo-section {
+	background-color: #E8F1F6;
+	height: 162px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.add-photo-section label {
+	background-color: #B9C5CC;
+	border-radius: 20px;
+    padding: 10px;
+	color: #306685;
+	font-size: 14px;
+}
+
+.position-photo {
+	display: flex;
+	align-items: center;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	padding: 14px;
+	background-color: white;
+}
+
+footer a {
+
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 300;
+
 }
 
 @keyframes fadeIn {

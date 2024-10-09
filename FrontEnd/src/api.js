@@ -58,8 +58,7 @@ async function logUser(user) {
     }
 }
 
-async function deleteWork(id) {
-    const token = window.localStorage.getItem("authToken");
+async function deleteWork(id, token) {
 
     if (!token) {
         console.error("Erreur: token non trouvé !");
@@ -87,6 +86,24 @@ async function deleteWork(id) {
     }
 }
 
-async function addWork() {
+async function addWork(formData, token) {
+    try {
+        const response = await fetch(url + "works", {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
 
+        if (!response.ok) {
+            throw new Error(`Erreur lors de l'ajout': ${response.status}`);
+        }
+
+        console.log("Ajout réussi");
+        return true;
+    } catch (error) {
+        console.error("Erreur lors de l'ajout':", error.message);
+        return false;
+    }
 }
