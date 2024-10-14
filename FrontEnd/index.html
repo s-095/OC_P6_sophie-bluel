@@ -33,7 +33,7 @@
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
 				<li><a href="login-page.html">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				<li><a href="https://instagram.com"><i class="fa-brands fa-instagram"></i></a></li>
 			</ul>
 		</nav>
 	</header>
@@ -80,7 +80,7 @@
 						<h3>Ajout photo</h3>
 						<form id="add-photo-form" action="#" method="post">
 							<div class="add-photo-section">
-								<i class="fa-regular fa-image"></i>
+								<img src="assets/images/img.svg" alt="icon image">
 								<label for="image">+ Ajouter photo</label>
 								<input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
 								<p>jpg, png : 4mo max</p>
@@ -90,7 +90,7 @@
 
 							<label for="category">Catégorie</label>
 							<select id="category" name="category" required>
-
+								<option value="" disabled selected hidden>Choisissez une catégorie</option>
 							</select>
 							<hr>
 							<button type="submit" class="submit-btn">Valider</button>

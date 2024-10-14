@@ -41,6 +41,7 @@ async function loadModalGallery() {
                 if (success) {
                     modalGallery.removeChild(figure);
                     generateWorks();
+                    closeModal();
                 }
             }
         });
@@ -48,22 +49,28 @@ async function loadModalGallery() {
         modalGallery.appendChild(figure)
         figure.appendChild(img);
         figure.appendChild(deleteIcon);
-        
+
 
     });
 }
 
 const closeModal = function (e) {
     if (modal === null) return;
-    e.preventDefault();
+
+    console.log("Fermeture de la modale");
+
+    if (e) e.preventDefault();
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
+    imageElement.src = defaultImage;
+    labelElement.style.display = "block";
+    paragraphElement.style.display = "block";
     modal = null;
-}
+};
 
 const stopPropagation = function (e) {
     e.stopPropagation()
@@ -95,10 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
         loadCategories();
     });
 
-    
+
     backToGalleryBtn.addEventListener("click", () => {
         addPhotoPage.classList.add("hidden");
         galleryPage.classList.remove("hidden");
+
     });
 });
 
@@ -117,9 +125,11 @@ async function loadCategories() {
 }
 
 const addPhotoForm = document.getElementById("add-photo-form");
+const imageElement = document.querySelector(".add-photo-section img");
+const defaultImage = "assets/images/img.svg";
 addPhotoForm.addEventListener("submit", async function (e) {
     e.preventDefault();
-    
+
     const formData = new FormData(addPhotoForm);
     const token = localStorage.getItem("authToken");
 
@@ -128,6 +138,7 @@ addPhotoForm.addEventListener("submit", async function (e) {
         if (newWork) {
             generateWorks();
             addPhotoForm.reset();
+            closeModal();
         } else {
             alert("Erreur lors de l'ajout de la photo.");
         }
@@ -136,8 +147,18 @@ addPhotoForm.addEventListener("submit", async function (e) {
     }
 });
 
-document.querySelector(".add-photo-selection file").addEventListener ("change", (event) => {});
+const fileImageUpload = document.querySelector(".add-photo-section input[type=file]");
+const labelElement = document.querySelector(".add-photo-section label");
+const paragraphElement = document.querySelector(".add-photo-section p");
 
-
+fileImageUpload.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const imageURL = URL.createObjectURL(file);
+        imageElement.src = imageURL;
+        labelElement.style.display = "none";
+        paragraphElement.style.display = "none";
+    }
+});
 
 

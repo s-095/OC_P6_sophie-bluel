@@ -32,8 +32,10 @@ function isConnected() {
 
 function displayEditMode() {
     const editModeBanner = document.querySelector(".edit_mode");
+    const header = document.querySelector("header");
     if (editModeBanner) {
         editModeBanner.style.visibility = "visible";
+        header.style.marginTop = "50px";
     }
 }
 
