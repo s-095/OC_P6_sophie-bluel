@@ -49,8 +49,6 @@ async function loadModalGallery() {
         modalGallery.appendChild(figure)
         figure.appendChild(img);
         figure.appendChild(deleteIcon);
-
-
     });
 }
 
@@ -69,6 +67,10 @@ const closeModal = function (e) {
     imageElement.src = defaultImage;
     labelElement.style.display = "block";
     paragraphElement.style.display = "block";
+    addPhotoForm.reset();
+    submitButton.style.backgroundColor = "";
+    imageIcon.style.marginTop = "";
+    showGalleryModalPage();
     modal = null;
 };
 
@@ -93,28 +95,48 @@ window.addEventListener("keydown", function (e) {
 document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.querySelector(".add-photo-button");
     const backToGalleryBtn = document.querySelector(".back-to-gallery");
+
+    addButton.addEventListener("click", showAddPhotoModalPage);
+
+    backToGalleryBtn.addEventListener("click", showGalleryModalPage);
+});
+
+function showGalleryModalPage() {
     const galleryPage = document.getElementById("gallery-page");
     const addPhotoPage = document.getElementById("add-photo-page");
 
-    addButton.addEventListener("click", () => {
-        galleryPage.classList.add("hidden");
-        addPhotoPage.classList.remove("hidden");
-        loadCategories();
-    });
+    addPhotoPage.classList.add("hidden");
+    galleryPage.classList.remove("hidden");
+    imageElement.src = defaultImage;
+    labelElement.style.display = "block";
+    paragraphElement.style.display = "block";
+}
 
+function showAddPhotoModalPage() {
+    const galleryPage = document.getElementById("gallery-page");
+    const addPhotoPage = document.getElementById("add-photo-page");
 
-    backToGalleryBtn.addEventListener("click", () => {
-        addPhotoPage.classList.add("hidden");
-        galleryPage.classList.remove("hidden");
-
-    });
-});
+    galleryPage.classList.add("hidden");
+    addPhotoPage.classList.remove("hidden");
+    loadCategories();
+    addPhotoForm.reset();
+    submitButton.style.backgroundColor = "";
+    imageIcon.style.marginTop ="";
+    
+}
 
 async function loadCategories() {
     const categories = await getCategories();
 
     const categorySelect = document.getElementById("category");
     categorySelect.innerHTML = '';
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    categorySelect.appendChild(defaultOption)
 
     categories.forEach(category => {
         const option = document.createElement("option");
@@ -150,15 +172,37 @@ addPhotoForm.addEventListener("submit", async function (e) {
 const fileImageUpload = document.querySelector(".add-photo-section input[type=file]");
 const labelElement = document.querySelector(".add-photo-section label");
 const paragraphElement = document.querySelector(".add-photo-section p");
+const imageIcon = document.querySelector(".add-photo-section img");
 
 fileImageUpload.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (file) {
         const imageURL = URL.createObjectURL(file);
         imageElement.src = imageURL;
+        imageIcon.style.marginTop ="unset";
         labelElement.style.display = "none";
         paragraphElement.style.display = "none";
     }
 });
 
+const submitButton = addPhotoForm.querySelector(".submit-btn");
+const titleInput = addPhotoForm.querySelector("#title");
+const categorySelect = addPhotoForm.querySelector("#category");
+const fileInput = addPhotoForm.querySelector("#image");
 
+function checkFormValidity() {
+    const isTitleFilled = titleInput.value !== ""; 
+    const isCategorySelected = categorySelect.value !== "";
+    const isFileSelected = fileInput.files.length > 0;
+
+    if (isTitleFilled && isCategorySelected && isFileSelected) {
+        submitButton.disabled = false;
+        submitButton.style.backgroundColor = "#1D6154";
+    } else {
+        submitButton.disabled = true;
+        submitButton.style.backgroundColor = "";
+    }
+}
+
+addPhotoForm.addEventListener("input", checkFormValidity);
+addPhotoForm.addEventListener("change", checkFormValidity);
